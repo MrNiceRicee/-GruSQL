@@ -28,16 +28,13 @@ type saucyString = keyof typeof theSauce;
 const replaceStrings = (input: string) => {
   console.log(input);
   // const test = input.replace(theSauce.SELECT.expression, theSauce.SELECT.replace);
-  const test = Object.keys(theSauce).reduce(
-    (previous, current: saucyString) => {
-      return previous.replace(
-        theSauce[current].expression,
-        theSauce[current].replace
-      );
-    },
-    input
-  );
-  console.log(test);
+  const test = Array.from(theSauce.keys()).reduce((previous, current) => {
+    return previous.replace(
+      theSauce.get(current)?.expression || '',
+      theSauce.get(current)?.replace || ''
+    );
+  }, input);
+  console.log('test', test);
 };
 
 const queryOne = async (
