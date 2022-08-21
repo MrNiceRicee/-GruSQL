@@ -23,10 +23,9 @@ const config: Config = {
 };
 
 const pool = new Pool(config);
-type saucyString = keyof typeof theSauce;
 
 const replaceStrings = (input: string) => {
-  console.log(input);
+  console.log('input', input);
   // const test = input.replace(theSauce.SELECT.expression, theSauce.SELECT.replace);
   const test = Array.from(theSauce.keys()).reduce((previous, current) => {
     return previous.replace(
@@ -34,14 +33,15 @@ const replaceStrings = (input: string) => {
       theSauce.get(current)?.replace || ''
     );
   }, input);
-  console.log('test', test);
+  console.log('output', test);
+  return test;
 };
 
 const queryOne = async (
   text: string,
   values?: Array<string | number> | undefined
 ) => {
-  const result = await pool.query(text, values);
+  const result = await pool.query(replaceStrings(text), values);
   return result?.rows?.[0];
 };
 
@@ -49,14 +49,13 @@ const queryRows = async (
   text: string,
   values?: Array<string | number> | undefined
 ) => {
-  replaceStrings(text);
-  const result = await pool.query(text, values);
+  const result = await pool.query(replaceStrings(text), values);
   return result?.rows;
 };
 
 const query = async (
   text: string,
   values?: Array<string | number> | undefined
-) => pool.query(text, values);
+) => pool.query(replaceStrings(text), values);
 
 export { query, queryOne, queryRows };

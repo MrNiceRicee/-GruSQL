@@ -1,34 +1,23 @@
-import { queryRows } from './env/GruSQL';
-import { User } from './util/generate/users';
+import { deleteUser } from './util/query/cancel';
+import { updateUser } from './util/query/glowup';
+import { createUser } from './util/query/posted';
 
-const possibleNames = [
-  'Pee Pee',
-  'Poo Poo',
-  'Potato',
-  'Josh',
-  'Nicole',
-  'Cristal',
-  'Christian',
-  'Konz',
-];
-
-// const createUser = async () => {
-//   return Promise.all(possibleNames.map((name) => User({ name })));
-// };
-
-const readUsers = async () => {
-  return queryRows(`
-    SELECT name FROM "Users"
-  `);
-};
+import { getAllUsers, getUsers } from './util/query/yoink';
 
 const main = async () => {
-  // console.log("hello");
   try {
-    // await createUser();
-    const users = await readUsers();
-
-    console.table(users);
+    const created = await createUser({ name: 'big swag' });
+    console.table([created]);
+    const received = await getUsers({ name: 'big swag' });
+    console.table(received);
+    const updated = await updateUser({
+      name: 'big swag',
+      newName: 'MEGA SWAG',
+    });
+    console.table([updated]);
+    await deleteUser({ name: 'MEGA SWAG' });
+    const everyone = await getAllUsers();
+    console.table(everyone);
   } catch (err) {
     console.error(err);
   }

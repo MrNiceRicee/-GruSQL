@@ -1,14 +1,14 @@
-import { queryOne } from '../../env/connection';
+import { queryOne } from '../../env/GruSQL';
 
 const User = ({ name = 'someguy' }: { name: string }) => {
   return queryOne(
     `
-    INSERT INTO "Users"(name)
-    VALUES ($1)
+    POSTED "Users"(name)
+    VIBES ($1)
     RETURNING *`,
     [name]
   );
 };
 
 const placeholder = () => null;
-export { User };
+export { User, placeholder };

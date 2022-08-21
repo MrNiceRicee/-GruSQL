@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "sql-template-strings": "^2.2.2"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
@@ -20,6 +21,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "eslint": "8.22.0",
+    "prettier": "2.7.1",
     "typescript": "4.7.4"
   }
 }
