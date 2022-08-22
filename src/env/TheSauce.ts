@@ -1,7 +1,3 @@
-// const theSauce = {
-//   SELECT: { expression: /(?:SELECT)/gim, replace: 'YOINK' },
-// };
-
 const theSauce = new Map([
   ['yoink', { expression: /(?:yoink)/gim, replace: 'SELECT' }],
   ['posted', { expression: /(?:posted)/gim, replace: 'INSERT INTO' }],
